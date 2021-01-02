@@ -5,7 +5,11 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
+    "start": "node server/server.js",
     "server": " nodemon ./server/server.js"
+  },
+  "engines": {
+    "node": "14.15.3"
   },
   "author": "Junaid Sikander Hakro",
   "license": "ISC",
