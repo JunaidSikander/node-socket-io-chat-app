@@ -5,6 +5,19 @@
     <title>Chat App</title>
 </head>
 <body>
-Welcome to Chat App
+<p>Welcome to Chat App</p>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+
+    socket.on('connect', () => {
+        console.log('Connected to server');
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Disconnected from server');
+    })
+
+</script>
 </body>
 </html>
