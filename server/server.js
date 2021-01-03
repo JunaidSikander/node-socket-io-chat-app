@@ -27,7 +27,6 @@ io.on('connection', (socket) => {
     //new joined user will recieve this msg
     socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat App'));
 
-
     //alert others user who are connected
     socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user Join'));
 
