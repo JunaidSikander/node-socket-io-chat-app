@@ -4,6 +4,7 @@ import * as socketIO from 'socket.io';
 import http from 'http';
 import {dirname, join} from 'path';
 import {fileURLToPath} from 'url';
+import {generateMessage} from "./utils/message.js";
 
 dotenv.config();
 
@@ -22,30 +23,20 @@ app.use(express.static(clientPath));
 io.on('connection', (socket) => {
     console.log('new user Connected');
 
-    socket.emit('newMessage', {
-        from: 'Admin',
-        text: 'Welcome to the chat App',
-        createdAt: new Date().getTime()
-    });
 
-    socket.broadcast.emit('newMessage', {
-        from: 'Admin',
-        text: 'New user Join',
-        createdAt: new Date().getTime()
-    });
+    //new joined user will recieve this msg
+    socket.emit('newMessage', generateMessage('Admin', 'Welcome to the chat App'));
 
-    socket.broadcast.emit('Admin', {
-        from: 'Greeting new User'
-    });
+
+    //alert others user who are connected
+    socket.broadcast.emit('newMessage', generateMessage('Admin', 'New user Join'));
+
+    socket.broadcast.emit('Admin', generateMessage('Admin', 'Greeting new user'));
 
 
     socket.on('createMessage', (msg) => {
         console.log('create Message', msg);
-        io.emit('newMessage', {
-            createdAt: new Date().getTime(),
-            from: msg.from,
-            text: msg.text
-        })
+        io.emit('newMessage', generateMessage(msg.from, msg.text));
     });
 
     socket.on('disconnect', () => {
