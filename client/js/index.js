@@ -4,9 +4,10 @@ socket.on('connect', function () {
     console.log('Connected to server');
 });
 socket.on('newMessage', function (msg) {
+    let formattedTime = moment(msg.createdAt).format('h:mm a');
     console.log('New message', msg);
     let li = jQuery('<li></li>');
-    li.text(`${msg.from}: ${msg.text}`);
+    li.text(`${msg.from} ${formattedTime} : ${msg.text}`);
     jQuery('#messages').append(li);
 });
 
