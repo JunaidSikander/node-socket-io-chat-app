@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Join | ChatApp</title>
+</head>
+<body class="chat">
+<div class="chat__sidebar">
+    <h3>Peoples</h3>
+    <div id="users"></div>
+</div>
+<div class="chat__main">
+    <ul id="messages" class="chat__messages"></ul>
+    <div class="chat__footer">
+        <form id="message-form">
+            <input name="message" type="text" placeholder="Message"/>
+            <button>Send</button>
+        </form>
+    </div>
+</div>
+
+<script id="message-template" type="text/template">
+    <li class="messages">
+        <div class="message__title">
+            <h4> {{from}} </h4>
+            <span> {{createdAt}} </span>
+        </div>
+        <div class="message__body">
+            <p> {{text}} </p>
+        </div>
+    </li>
+</script>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/libs/jquery-3.5.1.min.js"></script>
+<script src="/js/libs/moment.js"></script>
+<script src="/js/libs/mustache.js"></script>
+<script src="/js/index.js"></script>
+</body>
+</html>
